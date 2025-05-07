@@ -1,0 +1,123 @@
+﻿<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>UMKM Showcase</title>
+    <link rel="manifest" href="manifest.json" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="css/style.css" rel="stylesheet" />
+    <style>
+        body {
+            background-color: #f8f9fa;
+            font-family: 'Segoe UI', sans-serif;
+        }
+
+        h2 {
+            margin-top: 30px;
+            margin-bottom: 20px;
+            color: #0d6efd;
+        }
+
+        .gallery-img {
+            width: 100%;
+            height: auto;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+
+            .gallery-img:hover {
+                transform: scale(1.05);
+            }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">UMKM Kita</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="#produk">Produk</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#galeri">Galeri</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#katalog">Katalog</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#promo">Promo</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container py-4">
+        <section id="produk">
+            <h2>Peyek Kacang Bu Sari</h2>
+            <p>
+                Kerupuk kacang adalah salah satu camilan tradisional yang sudah melekat di hati masyarakat
+                Indonesia. Terbuat dari adonan tipis berbahan dasar tepung berkualitas, yang dipadukan dengan
+                kacang tanah utuh serta irisan daun seledri atau daun kucai kering, lalu digoreng hingga renyah dan
+                garing sempurna.
+                Setiap lembar kerupuk menawarkan cita rasa gurih khas kacang yang berpadu dengan aroma rempah
+                alami. Cocok dinikmati kapan saja—baik sebagai pendamping nasi, lauk pauk, ataupun camilan ringan
+                saat bersantai bersama keluarga.
+            </p>
+        </section>
+
+        <section id="galeri">
+            <h2>Galeri Produk</h2>
+            <div class="row g-4">
+                <div class="col-md-4"><img src="img/produk1.jpg" class="gallery-img" alt="Produk 1"></div>
+                <div class="col-md-4"><img src="img/produk2.jpg" class="gallery-img" alt="Produk 2"></div>
+                <div class="col-md-4"><img src="img/produk3.jpg" class="gallery-img" alt="Produk 3"></div>
+            </div>
+        </section>
+
+        <section id="katalog">
+            <h2>Katalog Digital</h2>
+            <iframe src="katalog/katalog.pdf" width="100%" height="500px" style="border:1px solid #ccc;"></iframe>
+        </section>
+
+        <section id="promo">
+            <h2>Video Promo</h2>
+            <video width="100%" controls>
+                <source src="video/promo.mp4" type="video/mp4">
+                Browser Anda tidak mendukung pemutar video.
+            </video>
+        </section>
+
+        <section id="loyalty">
+            <h2>Kupon dan Poin Loyalty</h2>
+            <p>Jumlah Poin Anda: <span id="poin">0</span></p>
+            <button class="btn btn-success me-2" onclick="tambahPoin(10)">+10 Poin</button>
+            <button class="btn btn-secondary" onclick="resetPoin()">Reset</button>
+        </section>
+    </div>
+
+    <script>if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('service-worker.js').then(() => {
+        console.log('Service Worker Registered');
+      });
+    }
+
+    function loadPoin() {
+      const poin = localStorage.getItem('poin') || 0;
+      document.getElementById('poin').innerText = poin;
+    }
+
+    function tambahPoin(jumlah) {
+      let poin = parseInt(localStorage.getItem('poin') || 0);
+      poin += jumlah;
+      localStorage.setItem('poin', poin);
+      loadPoin();
+    }
+
+    function resetPoin() {
+      localStorage.setItem('poin', 0);
+      loadPoin();
+    }
+
+    window.onload = loadPoin;</script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
